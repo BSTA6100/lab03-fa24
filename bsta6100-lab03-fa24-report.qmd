@@ -1,0 +1,427 @@
+---
+title: "BSTA 6100 Lab 3 Report"
+author: "Your Name"
+format:
+  html:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    theme: lumen
+    css: assets/styles.css
+    embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+knitr::opts_chunk$set(echo = TRUE)
+library(aplore3)
+```
+
+# Instructions
+
+Complete the following exercises in R / RStudio. It is important that you keep your answers inside the ".answer" blocks. Do NOT delete the three colon blocks (:::) and keep your responses between them. Use the tutorial for help, and don't be afraid to ask questions.
+
+**Collaborators:** If applicable, replace this text with the names of anyone you collaborated with on this project.
+
+You can find a list of colors you can use in R [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf). You can also directly use RGB colors via the `rgb()` function (see the help for more), or hex codes. If you don't know what those are, stick to the named colors in the linked PDF.
+
+The material in this lab is adapted from *OpenIntro Biostatistics*.
+
+## Background
+
+Patients admitted to an intensive care unit (ICU) are either extremely ill or considered to be at great risk of serious complications. There are no widely accepted criteria for distinguishing between patients who should be admitted to an ICU and those for whom admission to other hospital units would be more appropriate. Thus, among different ICUs, there are wide ranges in a patient's chance of survival. When studies are done to compare effectiveness of ICU care, it is critical to have a reliable means of assessing the comparability of the different patient populations.
+
+One such strategy for doing so involves the use of statistical modeling to relate empirical data for many patient variables to outcomes of interest. The following dataset consists of a sample of 200 subjects who were part of a much larger study on survival of patients following admission to an adult ICU.[^1] The major goal of the study was to develop a logistic regression model to predict the probability of survival to hospital discharge.[^2]
+
+[^1]: From Hosmer D.W., Lemeshow, S., and Sturdivant, R.X. *Applied Logistic Regression*. 3^rd^ ed., 2013.
+
+[^2]: Lemeshow S., et al. Predicting the outcome of intensive care unit patients. *Journal of the American Statistical Association* 83.402 (1988): 348-356.
+
+The following table provides a list of some the variables in the dataset and their description. The data are accessible as the `icu` dataset in the `aplore3` package.
+
+| Variable | Description                                                               |
+|--------------:|:--------------------------------------------------------|
+|     `id` | patient ID number                                                         |
+|    `sta` | patient status at discharge, either `Lived` or `Died`                     |
+|    `age` | patient age in years at admission                                         |
+| `gender` | patient gender, etiher `Male` or `Female`                                 |
+|    `cpr` | CPR prior to admission, either `No` or `Yes`                              |
+|    `hra` | Heart rate at admission (beats per minute)                                |
+|    `sys` | Systolic blood pressure at admission (mm Hg)                              |
+|    `cre` | Creatinine from initial blood gases, either `<= 2.0` or `> 2.0`, in mg/dL |
+
+We'll first load and inspect the data. Because the data are coming from a package, we can load it with the `data()` function.
+
+```{r}
+#| label: load_data
+
+data(icu)
+str(icu)
+```
+
+# Lab Assignment
+
+## Question 1
+
+In this question, you'll explore odds.
+
+::: question
+a.  Relevel the `sta` variable such that `0` corresponds to `Died` and `1` corresponds to `Lived` (i.e., make `Died` the reference group).
+:::
+
+::: answer
+```{r}
+#| label: question1a
+#| error: true
+# Replace this comment with code required for Question 1a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+:::
+
+::: question
+b.  Create a two-way table (with margins) of survival to discharge by whether CPR was administered prior to admission.
+:::
+
+::: answer
+```{r}
+#| label: question1b
+#| error: true
+# Replace this comment with code required for Question 1c. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+:::
+
+::: question
+c.  Calculate the odds of survival to discharge for those who did not receive CPR prior to ICU admission. Is someone who did not receive CPR prior to admission more likely to survive to discharge than to not survive to discharge?
+:::
+
+::: answer
+```{r}
+#| label: question1c
+#| error: true
+# Use R as a calculator.
+
+```
+:::
+
+::: question
+d.  Calculate the odds of survival to discharge for those who received CPR prior to ICU admission. Is someone who received CPR prior to admission more likely to survive to discharge than not?
+:::
+
+::: answer
+```{r}
+#| label: question1d
+#| error: true
+# Use R as a calculator.
+
+```
+:::
+
+::: question
+e.  Calculate the odds ratio of survival to discharge, comparing patients who receive CPR prior to admission to those who do not receive CPR prior to admission.
+:::
+
+::: answer
+```{r}
+#| label: question1e
+#| error: true
+# Use R as a calculator.
+
+```
+:::
+
+## Question 2
+
+Creatinine level in the data are recorded as being either less than or equal to 2.0 mg/dL or greater than 2.0 mg/dL. A typical creatinine level is between 0.5 - 1.0 mg/dL, and elevated creatinine may be a sign of renal failure.
+
+::: question
+a.  Calculate the odds of survival to discharge for patients who have a creatinine level less than or equal to 2.0 mg/dL. From the odds, calculate the probability of survival to discharge for these patients.
+:::
+
+::: answer
+```{r}
+#| label: question2a
+#| error: true
+# Use R as a calculator.
+
+```
+:::
+
+::: question
+b.  Calculate the probability of survival to discharge for patients who have a creatinine level greater than 2.0 mg/dL. From the probability, calculate the odds of survival to discharge for these patients.
+:::
+
+::: answer
+```{r}
+#| label: question2b
+#| error: true
+# Use R as a calculator.
+
+```
+:::
+
+::: question
+c.  Compute and interpret the odds ratio of survival to discharge, comparing patients with creatinine $> 2.0$ mg/dL to those with creatinine $\leq$ 2.0 mg/dL.
+:::
+
+::: answer
+```{r}
+#| label: question2c
+#| error: true
+# Use R as a calculator.
+
+```
+:::
+
+## Question 3
+
+::: question
+a.  Fit and summarize a simple logistic regression model to predict survival to discharge from prior CPR, and write the fitted model equation.
+:::
+
+::: answer
+```{r}
+#| label: question3a
+#| error: true
+# Replace this comment with code required for Question 3a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+
+The fitted model equation is
+$$
+% USE THE BELOW AS A TEMPLATE, making sure to surround your code
+% with double dollar signs to indicate that it's math
+
+\mathrm{logit}(p_i) = \beta_0 + \beta_1 \texttt{CPR}_i
+$$
+:::
+
+::: question
+b.  Interpret the intercept in the fitted model above. Confirm that your answer is compatible with your answer to Question 1a.
+:::
+
+::: answer
+Write your answer to question 3b here.
+:::
+
+::: question
+c.  Interpret the slope coefficient in the fitted model above. Confirm that your answer is compatible with your answer to Question 1c.
+:::
+
+::: answer
+Write your answer to question 3c here.
+:::
+
+::: question
+d.  Compute and interpret an odds ratio that summarizes the association between survival to discharge and prior CPR.
+:::
+
+::: answer
+```{r}
+#| label: question3d
+#| error: true
+
+# Use R as a calculator
+```
+
+Write your answer to 3d here.
+:::
+
+::: question
+e.  Is there evidence of an association between survival to discharge and prior CPR at significance level $\alpha = 0.05$? Explain why or why not.
+:::
+
+::: answer
+```{r}
+#| label: question3e
+#| error: true
+# Replace this comment with code required for Question 3e. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+
+Write your answer to 3e here.
+:::
+
+## Question 4
+
+::: question
+a.  Fit and summarize a logistic regression model to predict survival to discharge from an indicator of elevated creatinine. Write the model equation estimated from the data.
+:::
+
+::: answer
+```{r}
+#| label: question4a
+#| error: true
+# Replace this comment with code required for Question 4a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+
+Use the template code in Question 3a to write the fitted model equation here (including the double dollar signs).
+:::
+
+::: question
+b. Does the intercept have a meaningful interpretation in the context of the data?
+:::
+
+::: answer
+```{r}
+#| label: question4b
+#| error: true
+# Replace this comment with code required for Question 4b. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+
+Write your answer to 4b here.
+:::
+
+::: question
+c. Interpret the slope coefficient.
+:::
+
+::: answer
+Write your answer to 4c here.
+:::
+
+::: question
+d. Calculate the odds of survival to discharge for a 70-year-old individual using `predict()`. Is a 70-year-old individual more likely to survive than not?
+:::
+
+::: answer
+```{r}
+#| label: question4d
+#| error: true
+# Replace this comment with code required for Question 4d. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+
+Write your answer to 4d here.
+:::
+
+::: question
+e. Calculate the odds ratio of survival to discharge comparing a 45-year-old individual to a 70-year-old individual, using the `predict()` function.
+:::
+
+::: answer
+```{r}
+#| label: question4e
+#| error: true
+# Replace this comment with code required for Question 4e. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+
+Write your answer to 4e here.
+:::
+
+## Question 5
+
+:::question
+a. Fit and summarize a single model to predict survival to discharge (`sta`) from age (`age`), CPR prior to admission (`cpr`), and an indicator of elevated creatinine level (`cre`), then write the fitted model equation.
+:::
+
+::: answer
+```{r}
+#| label: question5a
+#| error: true
+# Replace this comment with code required for Question 5a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+Use the template code in Question 3a to write the fitted model equation here (including the double dollar signs).
+:::
+
+::: question
+b. Interpret each of the slope coefficients.
+:::
+
+::: answer
+- $\beta_1$ is
+- $\beta_2$ is
+- $\beta_3$ is
+:::
+
+::: question
+c. Calculate the odds of survival for a 65-year-old individual who did not receive CPR prior to admission and had creatinine level of 1.1 mg/dL. Is this individual more likely to survive than not survive?
+:::
+
+:: answer
+```{r}
+#| label: question5c
+#| error: true
+# Replace this comment with code required for Question 5c. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+Write your answer to 5c here.
+:::
+
+## Question 6
+
+:::question
+a. Fit and summarize a single model to predict survival to discharge (`sta`) from age (`age`), CPR prior to admission (`cpr`), and an interaction between age and CPR. 
+
+There are two ways to include an interaction in a model. For covariates `a` and `b`, `a:b` is the interaction term, and `a * b` is shorthand for `a + b + a:b`. 
+:::
+
+::: answer
+```{r}
+#| label: question6a
+#| error: true
+# Replace this comment with code required for Question 6a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+:::
+
+::: question
+b. Use the Wald test to test the hypothesis $H_0: \beta_3 = 0$ against the alternative $H_1: \beta_3 \neq 0$, where $\beta_3$ is the coefficient on the interaction term.
+:::
+
+::: answer
+```{r}
+#| label: question6b
+#| error: true
+# Replace this comment with code required for Question 6a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+Write your findings here.
+:::
+
+::: question
+c. Use the likelihood ratio test to test the hypothesis $H_0: \beta_3 = 0$ against the alternative $H_1: \beta_3 \neq 0$, where $\beta_3$ is the coefficient on the interaction term.
+:::
+
+::: answer
+```{r}
+#| label: question6c
+#| error: true
+# Replace this comment with code required for Question 6a. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+Discuss your results here.
+:::
+
+::: question
+d. Compare your conclusions from 6b and 6c. Are they the same or different, and why?
+:::
+
+::: answer
+Write your answer here.
+:::
+
+::: question
+e. Which is a better parsimonious model to predict ICU survival, the model from 5a (including age, CPR, and creatinine) or the model from 6a (including age, CPR, and their interaction)?
+:::
+
+::: answer
+```{r}
+#| label: question6e
+#| error: true
+# Replace this comment with code required for Question 6e. (Remember that this text is a comment, so R ignores it; you can delete it if you want.)
+
+```
+Discuss your results here.
+:::
+
+# Wrap-Up and Submission
+
+At the top of the document, make sure you've changed the `author` field to your name (in quotes!).
+
+When you've finished the lab, click the **render** button one last time, and submit the compiled HTML file to Canvas.
